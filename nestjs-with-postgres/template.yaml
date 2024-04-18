@@ -80,7 +80,9 @@ spec:
         targetPath: ./source
         values:
           git_host: github.com
+          sourceControl: github.com
           repoOwner: ${{parameters.repoOwner}}
+          orgName: ${{parameters.repoOwner}}
           repoName: ${{parameters.namespace}}-${{parameters.application_id}}
           owner: ${{parameters.owner}}
           cluster_id: ${{parameters.cluster_id}}
@@ -89,7 +91,7 @@ spec:
           description: ${{parameters.description}}
     - id: publishSource
       name: Publishing to Source Code Repository
-      action: publish:git
+      action: publish:github
       input:
         sourcePath: ./source
         description: ${{parameters.description}}
@@ -120,7 +122,7 @@ spec:
         targetPath: ./tenant-gitops
     - id: publishGitops
       name: Publishing to Deployment Resource Repository
-      action: publish:git
+      action: publish:github
       input:
         repoUrl: ${{parameters.git_host}}?owner=${{parameters.repoOwner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
         title: gitops resources for ${{parameters.namespace}}-poi-backend-app

@@ -72,7 +72,7 @@ spec:
           image_tag: 'latest'
     - id: open-mr-1
       name: Open merge request 1
-      action: publish:git:merge-request
+      action: publish:github:merge-request
       input: 
         repoUrl: ${{ parameters.git_host }}?repo=${{ parameters.namespace }}-${{ parameters.applicationId }}-gitops&owner=${{ parameters.repoOwner }}
         title: new files for staged deployment
@@ -90,7 +90,7 @@ spec:
         extra: ${{ steps['open-mr-1'].output.mergeRequestUrl }}
     - id: open-mr-2
       name: Open merge request 2
-      action: publish:git:merge-request
+      action: publish:github:merge-request
       input: 
         repoUrl: ${{ parameters.git_host }}?repo=${{ parameters.namespace }}-${{ parameters.applicationId }}-gitops&owner=${{ parameters.repoOwner }}
         title: updated files for staged deployment
@@ -108,7 +108,7 @@ spec:
         extra: ${{ steps['open-mr-2'].output.mergeRequestUrl }}
     - id: open-mr-3
       name: Open merge request 3
-      action: publish:git:merge-request
+      action: publish:github:merge-request
       input: 
         repoUrl: ${{ parameters.git_host }}?repo=${{ parameters.namespace }}-${{ parameters.applicationId }}-gitops&owner=${{ parameters.repoOwner }}
         title: deleted files for staged deployment

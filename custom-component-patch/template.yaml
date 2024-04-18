@@ -109,7 +109,7 @@ spec:
     - id: open-mr
       name: Open merge request(s)
       each: ${{ parameters.gitRepos }}
-      action: publish:git:merge-request
+      action: publish:github:merge-request
       input: 
         repoUrl: ${{ parameters.git_host }}?repo=${{ each.value }}&owner=${{ parameters.repoOwner }}
         title: custom patches for quarkus component
