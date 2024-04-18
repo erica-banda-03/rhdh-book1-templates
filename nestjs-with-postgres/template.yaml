@@ -17,9 +17,14 @@ spec:
   parameters:
     - title: Provide information about the Git location
       required:
-        - repoOwner
+        - git_host
+        - repo_owner
       properties:
-        repoOwner:
+        git_host:
+          title: Git Host
+          type: string
+          description: Git Host
+        repo_owner:
           title: Repo Owner
           type: string
           description: Git Organization
@@ -80,9 +85,7 @@ spec:
         targetPath: ./source
         values:
           git_host: github.com
-          sourceControl: github.com
-          repoOwner: ${{parameters.repoOwner}}
-          orgName: ${{parameters.repoOwner}}
+          repoOwner: ${{parameters.repo_owner}}
           repoName: ${{parameters.namespace}}-${{parameters.application_id}}
           owner: ${{parameters.owner}}
           cluster_id: ${{parameters.cluster_id}}
@@ -95,7 +98,7 @@ spec:
       input:
         sourcePath: ./source
         description: ${{parameters.description}}
-        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repoOwner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}
+        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repo_owner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
@@ -109,10 +112,10 @@ spec:
           git_host: github.com
           component_id: ${{parameters.namespace}}-${{parameters.application_id}}
           description: ${{parameters.description}}
-          destination: https://${{parameters.git_host}}/${{parameters.repoOwner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
-          source_repository: https://${{parameters.git_host}}/${{parameters.repoOwner}}/${{parameters.namespace}}-${{parameters.application_id}}.git
+          destination: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+          source_repository: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}.git
           repository_name: ${{parameters.namespace}}-${{parameters.application_id}}
-          git_owner: ${{parameters.repoOwner}}
+          git_owner: ${{parameters.repo_owner}}
           cluster: ${{parameters.cluster_id}}
           namespace: ${{parameters.namespace}}
           image_host: ${{parameters.image_host}}
@@ -124,7 +127,7 @@ spec:
       name: Publishing to Deployment Resource Repository
       action: publish:github
       input:
-        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repoOwner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
+        repoUrl: ${{parameters.git_host}}?owner=${{parameters.repo_owner}}&repo=${{parameters.namespace}}-${{parameters.application_id}}-gitops
         title: gitops resources for ${{parameters.namespace}}-poi-backend-app
         description: gitops resources for ${{parameters.namespace}}-poi-backend-app
         sourcePath: ./tenant-gitops
@@ -144,7 +147,7 @@ spec:
         appName: ${{parameters.namespace}}-${{parameters.application_id}}-bootstrap
         argoInstance: ebanda-dev-argocd
         namespace: ebanda-dev
-        repoUrl: https://${{parameters.git_host}}/${{parameters.repoOwner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+        repoUrl: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
         path: 'argocd/'
   output:
     links:
