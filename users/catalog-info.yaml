@@ -1,0 +1,5 @@
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  namespace: ebanda-dev
+  name: erica-banda-03
