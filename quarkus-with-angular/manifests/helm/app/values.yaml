@@ -6,7 +6,7 @@ namespace:
   enabled: true
   name: ${{values.namespace}}
   argocd:
-    name: default
+    name: argocd
 
 replicaCount: 1
 
