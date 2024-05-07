@@ -148,6 +148,7 @@ spec:
         argoInstance: argocd
         namespace: ebanda-dev
         repoUrl: https://${{parameters.git_host}}/${{parameters.repo_owner}}/${{parameters.namespace}}-${{parameters.application_id}}-gitops.git
+        projectName: default
         path: 'argocd/'
   output:
     links:
